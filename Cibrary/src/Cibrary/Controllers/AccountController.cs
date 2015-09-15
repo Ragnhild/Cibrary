@@ -118,7 +118,7 @@ namespace Cibrary.Controllers
                     //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
                     //    "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                    return RedirectToAction(nameof(BookController.Index), "Book");
                 }
                 AddErrors(result);
             }
@@ -134,7 +134,7 @@ namespace Cibrary.Controllers
         public async Task<IActionResult> LogOff()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(BookController.Index), "Book");
         }
 
         //
@@ -471,7 +471,7 @@ namespace Cibrary.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(BookController.Index), "Book");
             }
         }
 

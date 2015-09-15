@@ -365,7 +365,7 @@ namespace Cibrary.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), nameof(HomeController));
+                return RedirectToAction(nameof(BookController.Index), nameof(BookController));
             }
         }
 

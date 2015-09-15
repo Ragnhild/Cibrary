@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Book>
 
 <div class="container">
- 
+    <h2>Bøker i Cibrary: </h2>
 
     <div class="row">
         <div class="col-md-12">
@@ -20,25 +20,25 @@
                         <div id="collapse_@book.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@book.Id">
                             <div class="panel-body">
                                 <div>
-                                    Author: @book.Author     
+                                    <b>Forfatter:</b> @book.Author     
                                 </div>
 
                                 <div>
-                                    ISBN-13: @book.ISBN
+                                    <b>ISBN-13:</b> @book.ISBN
                                 </div>
                                 <div>
-                                    Category: @book.Category    
+                                    <b>Kategori:</b> @book.Category    
                                 </div>
                                 <div>
-                                    Available: @book.CountAvailable / @book.TotalCount
+                                    <b>Tilgjenglighet:</b> @book.CountAvailable / @book.TotalCount
                                 </div>
                                 @if (book.CountAvailable > 0)
                                 {
-                                    <a class="btn btn-default" style="float: right" href="/Book/Borrowed/@book.Id">Borrow</a>
+                                    <a class="btn btn-default" style="float: right" href="/Book/Borrowed/@book.Id">Lån</a>
                                 }
                                 else
                                 {
-                                    <p style="float:right">None available</p>
+                                    <p style="float:right">Ingen tilgjengelige</p>
                                 }
 
                             </div>
