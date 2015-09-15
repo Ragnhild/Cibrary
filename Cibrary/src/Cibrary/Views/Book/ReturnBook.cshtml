@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Borrow>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                @foreach (var loan in Model)
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading_@loan.Id">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@loan.Id" aria-expanded="true" aria-controls="collapse_@loan.Id">
+
+                                    @loan.Book.Title (@loan.Book.Year)
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse_@loan.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@loan.Id">
+                            <div class="panel-body">
+                                <div>
+                                    Author: @loan.Book.Author
+                                </div>
+
+                                <div>
+                                    ISBN-13: @loan.Book.ISBN
+                                </div>
+                                <div>
+                                    Category: @loan.Book.Category
+                                </div>
+                                <div>
+                                    Available: @loan.Book.CountAvailable / @loan.Book.TotalCount
+                                </div>
+                        
+                                    <a class="btn btn-default" style="float: right" href="/Book/Returned/@loan.Id">Return Book</a>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+

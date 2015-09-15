@@ -7,6 +7,7 @@ using Cibrary.Models;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
+using Microsoft.Data.Entity;
 
 namespace Cibrary.Controllers
 {
@@ -80,6 +81,23 @@ namespace Cibrary.Controllers
             {
                 throw new Exception();
             }
+        }
+
+        public IActionResult ReturnBook()
+        {
+
+            var loans = _db.Borrows.Include(x => x.Book).Where(x => x.UserId == User.GetUserId() && x.EndTime == null).ToList();
+            return View(loans);
+        }
+
+        public IActionResult Returned(int id)
+        {
+            var loan = _db.Borrows.Include( x=> x.Book).FirstOrDefault(x => x.Id == id);
+            loan.Book.CountAvailable += 1;
+            loan.EndTime = DateTime.Now;
+            _db.SaveChanges();
+            return View();
+
         }
 
     }
