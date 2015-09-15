@@ -90,7 +90,7 @@ namespace Cibrary.Controllers
                 _db.Borrows.Add(loan);
                 _db.SaveChanges();
 
-                return View();
+                return View(book);
             }
             else
             {
