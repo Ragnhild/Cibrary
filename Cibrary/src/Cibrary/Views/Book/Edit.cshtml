@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Book>
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                @foreach (var book in Model)
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading_@book.Id">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@book.Id" aria-expanded="true" aria-controls="collapse_@book.Id">
+
+                                    @book.Title (@book.Year)
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse_@book.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@book.Id">
+                            <div class="panel-body">
+                                <div>
+                                    Author: @book.Author
+                                </div>
+
+                                <div>
+                                    ISBN-13: @book.ISBN
+                                </div>
+                                <div>
+                                    Category: @book.Category
+                                </div>
+                                <div>
+                                    Available: @book.CountAvailable / @book.TotalCount
+                                </div>
+                                <a class="btn btn-default" style="float: right" href="/Book/Editor/@book.Id">Rediger</a>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
