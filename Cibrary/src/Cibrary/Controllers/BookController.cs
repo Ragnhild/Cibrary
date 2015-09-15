@@ -11,6 +11,8 @@ using Microsoft.Data.Entity;
 
 namespace Cibrary.Controllers
 {
+
+    [Authorize]
     public class BookController : Controller
     {
         private ApplicationDbContext _db;
