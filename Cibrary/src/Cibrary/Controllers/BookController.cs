@@ -45,12 +45,25 @@ namespace Cibrary.Controllers
         [HttpPost]
         public ActionResult Add(Book newBook)
         {
-            if(newBook.ISBN.Length == 10 || newBook.ISBN.Length == 13) { 
-                _db.Books.Add(newBook);
+            if(newBook.ISBN.Length == 10 || newBook.ISBN.Length == 13)
+            {
+                var existingBook = _db.Books.FirstOrDefault(x => x.ISBN == newBook.ISBN);
+                if (existingBook == null)
+                {
+
+                    newBook.CountAvailable = newBook.TotalCount;
+                    _db.Books.Add(newBook);
+                }
+                else
+                {
+                    existingBook.TotalCount += newBook.TotalCount;
+                    existingBook.CountAvailable += newBook.TotalCount;
+                }
+                
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            
             ViewBag.Message = "Feil i ISBN-nummer";
             return View();
         }
