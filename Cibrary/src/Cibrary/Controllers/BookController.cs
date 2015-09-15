@@ -76,8 +76,8 @@ namespace Cibrary.Controllers
             IEnumerable<Book> books = _db.Books.ToList();
             return View(books);
         }
-        
-        public IActionResult Borrowed(int id)
+
+        public IActionResult BorrowBook(int id)
         {
             var book = _db.Books.FirstOrDefault(x => x.Id == id);
             if (book != null && book.CountAvailable > 0)
@@ -90,27 +90,44 @@ namespace Cibrary.Controllers
                 _db.Borrows.Add(loan);
                 _db.SaveChanges();
 
-                return View(book);
+                return RedirectToAction("Borrowed", new {id = id});
             }
             else
             {
                 throw new Exception();
             }
+       
+
+
+        }
+        
+        public IActionResult Borrowed(int id)
+        {
+            var book = _db.Books.FirstOrDefault(x => x.Id == id);
+            return View(book);
+          
         }
 
-        public IActionResult ReturnBook()
+        public IActionResult Return()
         {
 
             var loans = _db.Borrows.Include(x => x.Book).Where(x => x.UserId == User.GetUserId() && x.EndTime == null).ToList();
             return View(loans);
         }
 
-        public IActionResult Returned(int id)
+        public IActionResult ReturnBook(int id)
         {
-            var loan = _db.Borrows.Include( x=> x.Book).FirstOrDefault(x => x.Id == id);
+            var loan = _db.Borrows.Include(x => x.Book).FirstOrDefault(x => x.Id == id);
             loan.Book.CountAvailable += 1;
             loan.EndTime = DateTime.Now;
             _db.SaveChanges();
+            return RedirectToAction("Returned", new {id = id});
+
+        }
+
+        public IActionResult Returned(int id)
+        {
+            var loan = _db.Borrows.Include( x=> x.Book).FirstOrDefault(x => x.Id == id);
             return View(loan.Book);
 
         }
