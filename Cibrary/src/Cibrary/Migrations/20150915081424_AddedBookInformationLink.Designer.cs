@@ -9,9 +9,14 @@ using Microsoft.Data.Entity.SqlServer.Metadata;
 namespace Cibrary.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class AddedBookInformationLink
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        public override string Id
+        {
+            get { return "20150915081424_AddedBookInformationLink"; }
+        }
+
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .Annotation("ProductVersion", "7.0.0-beta7-15540")
@@ -88,7 +93,7 @@ namespace Cibrary.Migrations
 
                     b.Property<int>("TotalCount");
 
-                    b.Property<int>("Year");
+                    b.Property<DateTime>("Year");
 
                     b.Key("Id");
                 });
