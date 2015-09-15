@@ -1,2 +1,11 @@
-﻿<h1>Book returned! Remember to physically return the Book :) </h1>
-<a href="/">Return to Home</a>
+﻿@model Book
+
+<div class="container">
+    <h2>Levert</h2>
+    <div>Du har levert: <i>@Model.Title</i> av <i>@Model.Author</i>. Husk å legg boken tilbake i hylla!
+    </div>
+
+
+    <a href="/">Hjem</a>
+
+</div>

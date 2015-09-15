@@ -1,1 +1,12 @@
-﻿<div>Borrowed book</div>
+﻿@model Book
+
+<div class="container">
+    <h2>Lånt</h2>
+    <div>
+        Du har lånt: <i>@Model.Title</i> av <i>@Model.Author</i>. Husk å levere boken når du er ferdig:)
+    </div>
+
+
+    <a href="/">Hjem</a>
+
+</div>

@@ -5,49 +5,51 @@
     Layout = "_Layout";
 }
 
-<h2>Legg til ny bok</h2>
-<div>
-    <form asp-controller="Book" asp-action="Create" method="post">
-        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="Title"></label>
-            <input asp-for="Title" class="form-control" placeholder="Title"/>
-            <span asp-validation-for="Title" class="text-danger"></span>
-        </div>
+<div class="container">
+    <h2>Legg til ny bok</h2>
+    <div>
+        <form asp-controller="Book" asp-action="Create" method="post">
+            <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title">Tittel</label>
+                <input asp-for="Title" class="form-control" placeholder="Title" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
 
-        <div class="form-group">
-            <label asp-for="Author"></label>
-            <input asp-for="Author" class="form-control" placeholder="Author"/>
-            <span asp-validation-for="Author" class="text-danger"></span>
-        </div>
+            <div class="form-group">
+                <label asp-for="Author">Forfatter</label>
+                <input asp-for="Author" class="form-control" placeholder="Author" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
 
-        <div class="form-group">
-            <label asp-for="ISBN"></label>
-            <input asp-for="ISBN" class="form-control" placeholder="ISBN" />
-            <span asp-validation-for="ISBN" class="text-danger"></span>
-        </div>
+            <div class="form-group">
+                <label asp-for="ISBN"></label>
+                <input asp-for="ISBN" class="form-control" placeholder="ISBN" />
+                <span asp-validation-for="ISBN" class="text-danger"></span>
+            </div>
 
 
-        <div class="form-group">
-            <select asp-for="CategoryId" asp-items="@ViewBag.Categories"></select>
-        </div>
+            <div class="form-group">
+                <select asp-for="CategoryId" asp-items="@ViewBag.Categories"></select>
+            </div>
 
-        <div class="form-group">
-            <label asp-for="Year"></label>
-            <input asp-for="Year" class="form-control" placeholder="1900"/>
-            <span asp-validation-for="Year" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="InformationLink"></label>
-            <input asp-for="InformationLink" class="form-control" placeholder="www.vg.no"/>
-            <span asp-validation-for="InformationLink" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="TotalCount">Number of copies of this books</label>
-            <input asp-for="TotalCount" class="form-control" />
-            <span asp-validation-for="TotalCount" class="text-danger"></span>
-        </div>
+            <div class="form-group">
+                <label asp-for="Year">År</label>
+                <input asp-for="Year" class="form-control" placeholder="1900" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InformationLink">Informasjonslenke</label>
+                <input asp-for="InformationLink" class="form-control" placeholder="www.vg.no" />
+                <span asp-validation-for="InformationLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalCount">Antall kopier av bok</label>
+                <input asp-for="TotalCount" class="form-control" />
+                <span asp-validation-for="TotalCount" class="text-danger"></span>
+            </div>
 
-        <input type="submit" class="btn btn-default" value="Create" />
-    </form>
+            <input type="submit" class="btn btn-default" value="Legg til" />
+        </form>
+    </div>
 </div>

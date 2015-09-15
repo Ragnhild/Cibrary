@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Borrow>
 
 <div class="container">
+    <h2>Du låner følgende bøker:</h2>
     <div class="row">
         <div class="col-md-12">
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -18,20 +19,19 @@
                         <div id="collapse_@loan.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@loan.Id">
                             <div class="panel-body">
                                 <div>
-                                    Author: @loan.Book.Author
+                                    <b>Forfatter:</b> @loan.Book.Author
                                 </div>
 
                                 <div>
-                                    ISBN-13: @loan.Book.ISBN
+                                    <b>ISBN-13:</b> @loan.Book.ISBN
                                 </div>
                                 <div>
-                                    Category: @loan.Book.Category
+                                    <b>Kategori:</b> @loan.Book.Category
                                 </div>
                                 <div>
-                                    Available: @loan.Book.CountAvailable / @loan.Book.TotalCount
+                                    <b>Tilgjengelighet</b>: @loan.Book.CountAvailable / @loan.Book.TotalCount
                                 </div>
-                        
-                                    <a class="btn btn-default" style="float: right" href="/Book/Returned/@loan.Id">Return Book</a>
+                                <a class="btn btn-default" style="float: right" href="/Book/ReturnBook/@loan.Id">Lever bok</a>
 
                             </div>
                         </div>
