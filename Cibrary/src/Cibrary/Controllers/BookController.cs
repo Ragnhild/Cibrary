@@ -8,6 +8,7 @@ using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
+using Microsoft.Framework.Logging;
 
 namespace Cibrary.Controllers
 {
@@ -70,9 +71,28 @@ namespace Cibrary.Controllers
             return View();
         }
 
+        public ActionResult Edit()
+        {
+            IEnumerable<Book> books = _db.Books.ToList();
+            return View(books);
+        }
+        
+        public ActionResult Editor(int id)
+        {
+            Book book = _db.Books.SingleOrDefault(x => x.Id == id);
+
+            ViewBag.Items = GetCategoryListItems();
+            return View(book);
+        }
+
+        private Task<Book> FindBookAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+
         public IActionResult Borrow(String query = null)
         {
-
             IEnumerable<Book> books = _db.Books.ToList();
             return View(books);
         }
