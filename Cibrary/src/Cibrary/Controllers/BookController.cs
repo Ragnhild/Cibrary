@@ -111,7 +111,7 @@ namespace Cibrary.Controllers
             loan.Book.CountAvailable += 1;
             loan.EndTime = DateTime.Now;
             _db.SaveChanges();
-            return View();
+            return View(loan.Book);
 
         }
 
