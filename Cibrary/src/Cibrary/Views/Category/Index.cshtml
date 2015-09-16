@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Category>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div class="row" style="padding: 10px; ">
+    <a href="/Category/Create" class="btn btn-default" style="">Legg til ny kategori</a>
+
+</div>
+
+<div class="row">
+
+    <table class="table table-striped" style="width: 40%">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+
+
+</div>
