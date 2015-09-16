@@ -19,5 +19,6 @@ namespace Cibrary.Models
         public int TotalCount { get; set; }
         public int CountAvailable { get; set; }
         public string InformationLink { get; set; }
+        public string ImageLink { get; set; }
     }
 }

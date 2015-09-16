@@ -55,7 +55,8 @@ namespace Cibrary.Services
                 Author = authorsString,
                 Title = title,
                 Year = year,
-                InformationLink = address 
+                InformationLink = address,
+                ImageLink = imageUrl
             };
             return book;
         }
