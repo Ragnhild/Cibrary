@@ -1,49 +1,72 @@
-﻿@model IEnumerable<Book>
+﻿@using Microsoft.AspNet.Routing
+@model IEnumerable<Book>
 
 <div class="container">
     <h2>Bøker i Cibrary: </h2>
-
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <div class="form-group">
+                    <label for="query">Søk</label>
+                    <input class="form-control" id="query" name="query" type="text" value="" placeholder="Tittel, forfatter, kategori, utgivelsesår..." style="max-width: none">
+                </div>
+                <div class="checkbox">
+                    <label for="available">Søk kun på tilgjengelige bøker
+                        <input type="checkbox" id="available" name="available" value="true" />
+                    </label>
+                </div>
+                <input type="submit" value="Søk" class="btn btn-default" style="margin-bottom: 30px"/>
+            </form>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                @foreach (var book in Model)
+                @if (Model.Count() > 0)
                 {
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="heading_@book.Id">
-                            <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@book.Id" aria-expanded="true" aria-controls="collapse_@book.Id">
-                              
-                                    @book.Title (@book.Year)
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse_@book.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@book.Id">
-                            <div class="panel-body">
-                                <div>
-                                    <b>Forfatter:</b> @book.Author     
-                                </div>
+                    foreach (var book in Model)
+                     {
+                         <div class="panel panel-default">
+                             <div class="panel-heading" role="tab" id="heading_@book.Id">
+                                 <h4 class="panel-title">
+                                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@book.Id" aria-expanded="true" aria-controls="collapse_@book.Id">
 
-                                <div>
-                                    <b>ISBN-13:</b> @book.ISBN
-                                </div>
-                                <div>
-                                    <b>Kategori:</b> @book.Category.CategoryName    
-                                </div>
-                                <div>
-                                    <b>Tilgjenglighet:</b> @book.CountAvailable / @book.TotalCount
-                                </div>
-                                @if (book.CountAvailable > 0)
-                                {
-                                    <a class="btn btn-default" style="float: right" href="/Book/BorrowBook/@book.Id">Lån</a>
-                                }
-                                else
-                                {
-                                    <p style="float:right">Ingen tilgjengelige</p>
-                                }
+                                         @book.Title (@book.Year)
+                                     </a>
+                                 </h4>
+                             </div>
+                             <div id="collapse_@book.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@book.Id">
+                                 <div class="panel-body">
+                                     <div>
+                                         <b>Forfatter:</b> @book.Author
+                                     </div>
 
-                            </div>
-                        </div>
-                    </div>
+                                     <div>
+                                         <b>ISBN-13:</b> @book.ISBN
+                                     </div>
+                                     <div>
+                                         <b>Kategori:</b> @book.Category.CategoryName
+                                     </div>
+                                     <div>
+                                         <b>Tilgjenglighet:</b> @book.CountAvailable / @book.TotalCount
+                                     </div>
+                                     @if (book.CountAvailable > 0)
+                                     {
+                                         <a class="btn btn-default" style="float: right" href="/Book/BorrowBook/@book.Id">Lån</a>
+                                     }
+                                     else
+                                     {
+                                         <p style="float: right">Ingen tilgjengelige</p>
+                                     }
+
+                                 </div>
+                             </div>
+                         </div>
+                     }
+                }
+                else
+                {
+                    <div>Ditt søk ga ingen treff..</div>
                 }
             </div>
         </div>

@@ -98,10 +98,26 @@ namespace Cibrary.Controllers
 
         }
 
-        public IActionResult Borrow(String query = null)
+        public IActionResult Borrow(String query = null, bool available = false)
         {
-            IEnumerable<Book> books = _db.Books.Include(x=>x.Category).ToList();
-            return View(books);
+
+            IEnumerable<Book> books = _db.Books.Include(x=> x.Category).Where(
+                x =>
+                    x.Author.Contains(query) || x.Title.Contains(query) || x.Category.CategoryName == query ||
+                    x.Year.ToString() == query);
+
+            if (String.IsNullOrEmpty(query))
+            {
+                books = _db.Books.Include(x=> x.Category);
+            }
+
+            if (available)
+            {
+                books = books.Where(x => x.CountAvailable > 0);
+            }
+
+            return View(books.ToList());
+
         }
 
         public IActionResult BorrowBook(int id)
