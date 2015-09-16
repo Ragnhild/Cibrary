@@ -97,7 +97,7 @@ namespace Cibrary.Controllers
         public ActionResult Editor(int id)
         {
             Book book = _db.Books.SingleOrDefault(x => x.Id == id);
-            ViewBag.Items = GetCategoryListItems(id);
+            ViewBag.Categories = GetCategoryListItems(id);
             return View(book);
         }
 
