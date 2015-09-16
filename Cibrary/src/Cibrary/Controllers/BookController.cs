@@ -80,16 +80,20 @@ namespace Cibrary.Controllers
         public ActionResult Editor(int id)
         {
             Book book = _db.Books.SingleOrDefault(x => x.Id == id);
-
             ViewBag.Items = GetCategoryListItems();
             return View(book);
         }
 
-        private Task<Book> FindBookAsync(int id)
+        [HttpPost]
+        public ActionResult Editor(Book book, int id)
         {
-            throw new NotImplementedException();
-        }
+            book.Id = id;
+            _db.Books.Attach(book);
+            _db.Entry(book).State = EntityState.Modified;
+            _db.SaveChanges();
+            return RedirectToAction("Index");
 
+        }
 
         public IActionResult Borrow(String query = null)
         {
