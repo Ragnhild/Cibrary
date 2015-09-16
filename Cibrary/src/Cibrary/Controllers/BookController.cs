@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Cibrary.Models;
 using Cibrary.Services;
 using HtmlAgilityPack;
+using Cibrary.ViewItems;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
@@ -164,10 +165,39 @@ namespace Cibrary.Controllers
           
         }
 
-        public IActionResult Return()
+        public IActionResult Return(DateTime? from = null, DateTime? to = null)
         {
+            var searched = true;
 
-            var loans = _db.Borrows.Include(x => x.Book).Where(x => x.UserId == User.GetUserId() && x.EndTime == null).ToList();
+            if ((to == null && from == null))
+            {
+                searched = false;
+            }
+            if (to == null)
+            {
+                to = DateTime.Today;
+            }
+            if (from == null)
+            {
+                from = DateTime.Today;
+            }
+            if (searched)
+            {
+                from = from.Value.Date;
+                to = new DateTime(to.Value.Year, to.Value.Month, to.Value.Day, 23, 59, 59);
+            }
+
+            var currentLoans = _db.Borrows.Include(x => x.Book).Where(x => x.UserId == User.GetUserId() && x.EndTime == null).ToList();
+
+            var previousLoans =
+                _db.Borrows.Include(x => x.Book).Where(x => x.StartTime >= from && x.StartTime <= to).ToList(); 
+
+            var loans = new Loans();
+            loans.Current = currentLoans;
+            loans.Previous = previousLoans;
+            loans.from = from.Value;
+            loans.to = to.Value;
+
             return View(loans);
         }
 
