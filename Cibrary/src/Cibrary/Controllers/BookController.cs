@@ -105,8 +105,19 @@ namespace Cibrary.Controllers
         public ActionResult Editor(Book book, int id)
         {
             book.Id = id;
-            _db.Books.Attach(book);
-            _db.Entry(book).State = EntityState.Modified;
+            var eBook = _db.Books.FirstOrDefault(x => x.Id == id);
+            eBook.ImageLink = book.ImageLink;
+            eBook.Author = book.Author;
+            eBook.Category = book.Category;
+            if (eBook.TotalCount < book.TotalCount)
+            {
+                eBook.CountAvailable += book.TotalCount;
+            }
+            eBook.TotalCount = book.TotalCount;
+            eBook.Title = book.Title;
+            eBook.InformationLink = book.InformationLink;
+            eBook.Year = book.Year;
+            _db.Entry(eBook).State = EntityState.Modified;
             _db.SaveChanges();
             return RedirectToAction("Index");
 
