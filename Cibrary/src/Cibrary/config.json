@@ -2,6 +2,8 @@
   "Data": {
     "DefaultConnection": {
       "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-Cibrary-78c93703-e41c-4764-b3aa-a0e64231c26f;Trusted_Connection=True;MultipleActiveResultSets=true"
-    }
+    },
+  "CiberClientId": "asdf",
+  "CiberClientSecret": "asdf"
   }
 }

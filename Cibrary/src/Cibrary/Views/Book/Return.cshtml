@@ -1,11 +1,65 @@
-﻿@model IEnumerable<Borrow>
+﻿@model Cibrary.ViewItems.Loans
 
 <div class="container">
-    <h2>Du låner følgende bøker:</h2>
+    <h2>Nåværende lån</h2>
+
     <div class="row">
         <div class="col-md-12">
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                @foreach (var loan in Model)
+                @foreach (var loan in Model.Current)
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading_@loan.Id">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@loan.Id" aria-expanded="true" aria-controls="collapse_@loan.Id">
+
+                                    @loan.Book.Title (@loan.Book.Year)
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse_@loan.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@loan.Id">
+                            <div class="panel-body">
+                                <div>
+                                    <b>Forfatter:</b> @loan.Book.Author
+                                </div>
+
+                                <div>
+                                    <b>ISBN-13:</b> @loan.Book.ISBN
+                                </div>
+                                <div>
+                                    <b>Kategori:</b> @loan.Book.Category
+                                </div>
+                                <div>
+                                    <b>Tilgjengelighet</b>: @loan.Book.CountAvailable / @loan.Book.TotalCount
+                                </div>
+                                <a class="btn btn-default" style="float: right" href="/Book/ReturnBook/@loan.Id">Lever bok</a>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+    <h2>Vis lån fra periode</h2>
+    <form>
+        <div class="form-group">
+            <label for="from">Fra</label>
+            <input id="from" name="from" class="form-control" type="date" value="@Model.from.Date.ToString("yyyy-MM-dd")"/>
+        </div>
+        <div class="form-group">
+            <label for="to">Til</label>
+            <input id="to" name="to" class="form-control" type="date" value="@Model.to.Date.ToString("yyyy-MM-dd")"/>
+        </div>
+        <input type="submit" value="Søk" class="btn btn-default" style="margin-bottom: 30px">
+    </form>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                @foreach (var loan in Model.Previous)
                 {
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="heading_@loan.Id">

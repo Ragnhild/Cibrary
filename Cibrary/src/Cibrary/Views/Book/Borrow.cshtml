@@ -8,11 +8,11 @@
             <form>
                 <div class="form-group">
                     <label for="query">Søk</label>
-                    <input class="form-control" id="query" name="query" type="text" value="" placeholder="Tittel, forfatter, kategori, utgivelsesår..." style="max-width: none">
+                    <input class="form-control" id="query" name="query" type="text" value="@ViewBag.query" placeholder="Tittel, forfatter, kategori, utgivelsesår..." style="max-width: none">
                 </div>
                 <div class="checkbox">
                     <label for="available">Søk kun på tilgjengelige bøker
-                        <input type="checkbox" id="available" name="available" value="true" />
+                        <input type="checkbox" id="available" name="available" value="true" checked="@ViewBag.isChecked" />
                     </label>
                 </div>
                 <input type="submit" value="Søk" class="btn btn-default" style="margin-bottom: 30px"/>
