@@ -122,9 +122,10 @@ namespace Cibrary
             // For more information see http://go.microsoft.com/fwlink/?LinkID=532715
             // app.UseFacebookAuthentication();
             // app.UseGoogleAuthentication();
+            var asdf = Configuration["Data:CiberClientId"];
             app.UseMicrosoftAccountAuthentication(options =>
             {
-                options.ClientId = Configuration["Data:CiberClientId"];
+                options.ClientId = asdf;
                 options.ClientSecret = Configuration["Data:CiberClientSecret"];
             });
             // app.UseTwitterAuthentication();
