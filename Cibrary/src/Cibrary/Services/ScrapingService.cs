@@ -34,7 +34,7 @@ namespace Cibrary.Services
                 doc.DocumentNode.Descendants()?
                     .FirstOrDefault(x => x.Attributes.Any(y => y.Name == "itemprop" && y.Value == "image"))?
                     .Attributes.FirstOrDefault(z => z.Name == "src")?.Value;
-            imageUrl = (imageUrl.StartsWith("//")) ? imageUrl.Remove(0, 2) : imageUrl;
+            imageUrl = (imageUrl.StartsWith("//")) ? "https://" + imageUrl.Remove(0, 2) : "https://" + imageUrl;
 
             
             string datePattern = "\\d{1,2}\\/\\d{1,2}\\/\\d{4,4}";

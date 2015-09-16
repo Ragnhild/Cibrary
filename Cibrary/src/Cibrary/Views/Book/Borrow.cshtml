@@ -37,28 +37,35 @@
                              </div>
                              <div id="collapse_@book.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@book.Id">
                                  <div class="panel-body">
-                                     <div>
-                                         <b>Forfatter:</b> @book.Author
-                                     </div>
+                                     <div class="row">
+                                         <div class="col-xs-2">                                             
+                                             <img class="img-responsive" src="@book.ImageLink">
+                                         </div>
+                                         <div class="col-xs-10">
+                                             <div>
+                                                 <b>Forfatter:</b> @book.Author
+                                             </div>
 
-                                     <div>
-                                         <b>ISBN-13:</b> @book.ISBN
-                                     </div>
-                                     <div>
-                                         <b>Kategori:</b> @book.Category.CategoryName
-                                     </div>
-                                     <div>
-                                         <b>Tilgjenglighet:</b> @book.CountAvailable / @book.TotalCount
-                                     </div>
-                                     @if (book.CountAvailable > 0)
-                                     {
-                                         <a class="btn btn-default" style="float: right" href="/Book/BorrowBook/@book.Id">Lån</a>
-                                     }
-                                     else
-                                     {
-                                         <p style="float: right">Ingen tilgjengelige</p>
-                                     }
+                                             <div>
+                                                 <b>ISBN-13:</b> @book.ISBN
+                                             </div>
+                                             <div>
+                                                 <b>Kategori:</b> @book.Category.CategoryName
+                                             </div>
+                                             <div>
+                                                 <b>Tilgjenglighet:</b> @book.CountAvailable / @book.TotalCount
+                                             </div>
+                                             @if (book.CountAvailable > 0)
+                                             {
+                                                 <a class="btn btn-default" style="float: right" href="/Book/BorrowBook/@book.Id">Lån</a>
+                                             }
+                                             else
+                                             {
+                                                 <p style="float: right">Ingen tilgjengelige</p>
+                                             }
 
+                                         </div>
+                                     </div>
                                  </div>
                              </div>
                          </div>

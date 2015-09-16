@@ -19,21 +19,28 @@
                         </div>
                         <div id="collapse_@book.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@book.Id">
                             <div class="panel-body">
-                                <div>
-                                    Author: @book.Author
-                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        <img class="img-responsive" src="@book.ImageLink">
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <div>
+                                            Author: @book.Author
+                                        </div>
 
-                                <div>
-                                    ISBN-13: @book.ISBN
-                                </div>
-                                <div>
-                                    Category: @book.Category.CategoryName
-                                </div>
-                                <div>
-                                    Available: @book.CountAvailable / @book.TotalCount
-                                </div>
-                                <a class="btn btn-default" style="float: right" href="/Book/Editor/@book.Id">Rediger</a>
+                                        <div>
+                                            ISBN-13: @book.ISBN
+                                        </div>
+                                        <div>
+                                            Category: @book.Category.CategoryName
+                                        </div>
+                                        <div>
+                                            Available: @book.CountAvailable / @book.TotalCount
+                                        </div>
+                                        <a class="btn btn-default" style="float: right" href="/Book/Editor/@book.Id">Rediger</a>
 
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

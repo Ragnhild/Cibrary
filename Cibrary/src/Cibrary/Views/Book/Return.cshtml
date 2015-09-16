@@ -18,21 +18,28 @@
                         </div>
                         <div id="collapse_@loan.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@loan.Id">
                             <div class="panel-body">
-                                <div>
-                                    <b>Forfatter:</b> @loan.Book.Author
-                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        <img class="img-responsive" src="@loan.Book.ImageLink">
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <div>
+                                            <b>Forfatter:</b> @loan.Book.Author
+                                        </div>
 
-                                <div>
-                                    <b>ISBN-13:</b> @loan.Book.ISBN
-                                </div>
-                                <div>
-                                    <b>Kategori:</b> @loan.Book.Category
-                                </div>
-                                <div>
-                                    <b>Tilgjengelighet</b>: @loan.Book.CountAvailable / @loan.Book.TotalCount
-                                </div>
-                                <a class="btn btn-default" style="float: right" href="/Book/ReturnBook/@loan.Id">Lever bok</a>
+                                        <div>
+                                            <b>ISBN-13:</b> @loan.Book.ISBN
+                                        </div>
+                                        <div>
+                                            <b>Kategori:</b> @loan.Book.Category
+                                        </div>
+                                        <div>
+                                            <b>Tilgjengelighet</b>: @loan.Book.CountAvailable / @loan.Book.TotalCount
+                                        </div>
+                                        <a class="btn btn-default" style="float: right" href="/Book/ReturnBook/@loan.Id">Lever bok</a>
 
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
