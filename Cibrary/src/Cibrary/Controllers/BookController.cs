@@ -118,10 +118,16 @@ namespace Cibrary.Controllers
             ViewBag.isChecked = available;
             ViewBag.query = query;
 
+            if (query != null)
+            {
+                query = query.ToLower();
+
+            }
+
             IEnumerable<Book> books = _db.Books.Include(x=> x.Category).Where(
                 x =>
-                    x.Author.Contains(query) || x.Title.Contains(query) || x.Category.CategoryName == query ||
-                    x.Year.ToString() == query);
+                    x.Author.ToLower().Contains(query) || x.Title.ToLower().Contains(query) || x.Category.CategoryName.ToLower() == query ||
+                    x.Year.ToString() == query || x.ISBN == query);
 
             if (String.IsNullOrEmpty(query))
             {
