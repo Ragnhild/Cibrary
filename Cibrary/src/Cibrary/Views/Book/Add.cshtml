@@ -10,24 +10,24 @@
     <div>
         <form asp-controller="Book" asp-action="Create" method="post">
             <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="ISBN"></label>
+                <input asp-for="ISBN" class="form-control" placeholder="ISBN"/>
+                <span asp-validation-for="ISBN" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="Title">Tittel</label>
-                <input asp-for="Title" class="form-control" placeholder="Title" />
+                <input asp-for="Title" class="form-control" placeholder="Title"/>
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Author">Forfatter</label>
-                <input asp-for="Author" class="form-control" placeholder="Author" />
+                <input asp-for="Author" class="form-control" placeholder="Author"/>
                 <span asp-validation-for="Author" class="text-danger"></span>
             </div>
-
-            <div class="form-group">
-                <label asp-for="ISBN"></label>
-                <input asp-for="ISBN" class="form-control" placeholder="ISBN" />
-                <span asp-validation-for="ISBN" class="text-danger"></span>
-            </div>
-
 
             <div class="form-group">
                 <select asp-for="CategoryId" asp-items="@ViewBag.Categories"></select>
@@ -35,21 +35,49 @@
 
             <div class="form-group">
                 <label asp-for="Year">År</label>
-                <input asp-for="Year" class="form-control" placeholder="1900" />
+                <input asp-for="Year" class="form-control" placeholder="1900"/>
                 <span asp-validation-for="Year" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="InformationLink">Informasjonslenke</label>
-                <input asp-for="InformationLink" class="form-control" placeholder="www.vg.no" />
+                <input asp-for="InformationLink" class="form-control" placeholder="www.vg.no"/>
                 <span asp-validation-for="InformationLink" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TotalCount">Antall kopier av bok</label>
-                <input asp-for="TotalCount" class="form-control" />
+                <input asp-for="TotalCount" class="form-control"/>
                 <span asp-validation-for="TotalCount" class="text-danger"></span>
             </div>
 
-            <input type="submit" class="btn btn-default" value="Legg til" />
+            <input type="submit" class="btn btn-default" value="Legg til"/>
         </form>
     </div>
 </div>
+
+<script >
+    document.getElementById("ISBN").addEventListener('input', function () {
+        var isbn = document.getElementById("ISBN").value;
+        console.log("isbn: ", isbn);
+        if (isbn && isbn.length == 13) {
+            var request = new XMLHttpRequest();
+            request.open('GET', '/Book/SearchByISBN?isbn=' + isbn, true);
+
+            request.onload = function () {
+                if (request.status >= 200 && request.status < 400) {
+                    // Success!
+                    var data = JSON.parse(request.responseText);
+                    document.getElementById("Title").value = data.Title;
+                    document.getElementById("Author").value = data.Author;
+                    document.getElementById("Year").value = data.Year;
+                    document.getElementById("InformationLink").value = data.InformationLink;
+                } 
+            };
+
+            request.onerror = function () {
+                // There was a connection error of some sort
+            };
+
+            request.send();
+        }
+    })
+</script>

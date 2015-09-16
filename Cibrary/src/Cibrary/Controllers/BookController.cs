@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Cibrary.Models;
+using Cibrary.Services;
+using HtmlAgilityPack;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
@@ -17,10 +23,12 @@ namespace Cibrary.Controllers
     public class BookController : Controller
     {
         private ApplicationDbContext _db;
+        private readonly IScrapingService _scraping;
 
-        public BookController(ApplicationDbContext db)
+        public BookController(ApplicationDbContext db, IScrapingService scraping)
         {
             _db = db;
+            _scraping = scraping;
         }
 
         public ActionResult Index()
@@ -33,6 +41,11 @@ namespace Cibrary.Controllers
             ViewBag.Categories = GetCategoryListItems();
             return View();
 
+        }
+
+        public async Task<Book> SearchByISBN(String isbn)
+        {
+            return await _scraping.Scrape(isbn);
         }
 
         private IEnumerable<SelectListItem> GetCategoryListItems(int id = -1)
