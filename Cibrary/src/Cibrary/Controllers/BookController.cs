@@ -35,13 +35,14 @@ namespace Cibrary.Controllers
 
         }
 
-        private IEnumerable<SelectListItem> GetCategoryListItems()
+        private IEnumerable<SelectListItem> GetCategoryListItems(int id = -1)
         {
             var tmp = _db.Categories.ToList();
             return tmp.Select(category => new SelectListItem
             {
                 Text = category.CategoryName,
-                Value = category.Id.ToString()
+                Value = category.Id.ToString(),
+                Selected = category.Id == id
             });
         }
 
@@ -73,14 +74,16 @@ namespace Cibrary.Controllers
 
         public ActionResult Edit()
         {
-            IEnumerable<Book> books = _db.Books.ToList();
+
+            IEnumerable<Book> books = _db.Books.Include(x => x.Category).ToList();
+         
             return View(books);
         }
         
         public ActionResult Editor(int id)
         {
             Book book = _db.Books.SingleOrDefault(x => x.Id == id);
-            ViewBag.Items = GetCategoryListItems();
+            ViewBag.Items = GetCategoryListItems(id);
             return View(book);
         }
 
@@ -97,7 +100,7 @@ namespace Cibrary.Controllers
 
         public IActionResult Borrow(String query = null)
         {
-            IEnumerable<Book> books = _db.Books.ToList();
+            IEnumerable<Book> books = _db.Books.Include(x=>x.Category).ToList();
             return View(books);
         }
 
