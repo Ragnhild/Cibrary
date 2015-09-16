@@ -86,6 +86,7 @@ namespace Cibrary
             // Register application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<IScrapingService, ScrapingService>();
         }
 
         // Configure is called after ConfigureServices is called.
