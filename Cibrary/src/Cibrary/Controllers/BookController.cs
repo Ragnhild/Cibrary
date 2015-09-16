@@ -115,6 +115,9 @@ namespace Cibrary.Controllers
         public IActionResult Borrow(String query = null, bool available = false)
         {
 
+            ViewBag.isChecked = available;
+            ViewBag.query = query;
+
             IEnumerable<Book> books = _db.Books.Include(x=> x.Category).Where(
                 x =>
                     x.Author.Contains(query) || x.Title.Contains(query) || x.Category.CategoryName == query ||
