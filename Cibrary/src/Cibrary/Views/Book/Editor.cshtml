@@ -50,8 +50,13 @@
         </div>
         <div class="form-group">
             <label asp-for="TotalCount">Number of copies of this books</label>
-            <input asp-for="TotalCount" class="form-control" />
+            <input asp-for="TotalCount" class="form-control"/>
             <span asp-validation-for="TotalCount" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CountAvailable">Number of copies available</label>
+            <input asp-for="CountAvailable" class="form-control" />
+            <span asp-validation-for="CountAvailable" class="text-danger"></span>
         </div>
 
         <input type="submit" class="btn btn-default" value="Update" />

@@ -109,10 +109,7 @@ namespace Cibrary.Controllers
             eBook.ImageLink = book.ImageLink;
             eBook.Author = book.Author;
             eBook.Category = book.Category;
-            if (eBook.TotalCount < book.TotalCount)
-            {
-                eBook.CountAvailable += book.TotalCount;
-            }
+            eBook.CountAvailable = book.CountAvailable;
             eBook.TotalCount = book.TotalCount;
             eBook.Title = book.Title;
             eBook.InformationLink = book.InformationLink;
